@@ -7,17 +7,13 @@ extends Node
 const DEFAULT_PORT = 7777
 
 # Maximum number of players/peers allowed
-const MAX_PEERS = 32
+const MAX_PEERS = 4
 
 # Dictionary to store peer data if needed (optional for simple relay)
-# var peers = {}
+var peers = {}
 
 func _ready():
 	print("--- Server.gd _ready() STARTED ---") # Keep this
-
-	# --- Try creating the peer ---
-	var peer = ENetMultiplayerPeer.new()
-	print("--- ENetMultiplayerPeer INSTANTIATED ---") # <-- ADD THIS LINE
 
 	# --- COMMENT OUT THE REST AGAIN ---
 	# var port = OS.get_environment("PORT")
@@ -56,10 +52,10 @@ func _on_peer_disconnected(id):
 	#	peers.erase(id)
 
 # --- Optional: If you needed to inspect or modify packets ---
-# func _on_peer_packet(id, packet):
-# 	print("Received packet from %d" % id)
-# 	# Basic relay usually doesn't need to intercept packets here,
-#	# as ENetMultiplayerPeer handles routing by default based on target peer ID.
+func _on_peer_packet(id, packet):
+	print("Received packet from %d" % id)
+	# Basic relay usually doesn't need to intercept packets here,
+	# as ENetMultiplayerPeer handles routing by default based on target peer ID.
 
 func _process(delta):
 	# Keep the server running.

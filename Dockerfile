@@ -31,4 +31,4 @@ USER appuser
 EXPOSE 7777
 
 # === Run the MINIMAL debug scene ===
-CMD ["./GodotRelayServer", "--headless", "--verbose", "res://debug_scene.tscn"]
+CMD ["./GodotRelayServer", "--headless", "--verbose", "res://main.tscn"]
