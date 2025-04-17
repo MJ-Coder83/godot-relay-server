@@ -46,5 +46,6 @@ USER appuser
 # Expose the port (for documentation)
 EXPOSE 7777
 
-# === UPDATED: Run with just headless and verbose ===
-CMD ["./GodotRelayServer", "--headless", "--verbose"]
+# === UPDATED: Run the debug script directly ===
+# CMD ["./GodotRelayServer", "--headless", "--verbose"] # Original CMD
+CMD ["./GodotRelayServer", "--headless", "--verbose", "--script", "res://debug_runner.gd"]
