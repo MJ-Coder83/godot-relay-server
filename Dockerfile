@@ -43,14 +43,6 @@ RUN chown -R appuser:appuser /home/appuser
 # Switch to the non-root user
 USER appuser
 
-# Expose the port (for documentation)
-EXPOSE 7777
-
-# === NEW: List files in the workdir right before CMD ===
-# Run as root to ensure permissions aren't an issue for ls
-USER root
-RUN ls -l /home/appuser
-USER appuser # Switch back to appuser for CMD
-
-# === Run with --headless and --verbose ===
-CMD ["./GodotRelayServer", "--headless", "--verbose"]
+# === TEMPORARY DEBUG: Change CMD to list files ===
+# CMD ["./GodotRelayServer", "--headless", "--verbose"] # Original CMD
+CMD ["ls", "-l", "/home/appuser"] # Temporary CMD for debugging
