@@ -15,7 +15,7 @@ RUN godot --headless --verbose --export-release "Linux" ./build/linux/GodotRelay
 
 # --- Stage 2: Create the final minimal image ---
 # Use a minimal base image like Debian slim
-FROM debian:bullseye-slim
+FROM debian:bullseye
 
 # Install runtime dependencies for Godot headless server
 # Add common libraries sometimes needed by standard exports
@@ -24,6 +24,7 @@ RUN apt-get update && \
     libssl1.1 \
     ca-certificates \
     libx11-6 libxcursor1 libxinerama1 libxrandr2 libxi6 libasound2 && \
+	apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # Create a non-root user to run the application
