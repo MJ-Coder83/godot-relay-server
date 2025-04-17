@@ -46,5 +46,5 @@ USER appuser
 # Expose the port (for documentation)
 EXPOSE 7777
 
-# === UPDATED: Run with headless, verbose, and dummy drivers ===
-CMD ["./GodotRelayServer", "--headless", "--verbose", "--display-driver", "dummy", "--audio-driver", "dummy"]
+# === UPDATED: Run with just headless and verbose ===
+CMD ["./GodotRelayServer", "--headless", "--verbose"]
