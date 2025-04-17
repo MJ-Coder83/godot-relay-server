@@ -5,7 +5,7 @@ WORKDIR /app/
 COPY . /app/
 RUN mkdir -v -p /app/build/linux
 RUN godot --headless --verbose --export-release "Linux" ./build/linux/GodotRelayServer --path /app
-RUN ls -l /app/build/linux
+# Removed debug ls command
 
 FROM debian:bullseye
 
@@ -19,7 +19,7 @@ RUN apt-get update && \
 RUN useradd --system --create-home --shell /bin/bash appuser
 WORKDIR /home/appuser
 COPY --from=builder /app/build/linux/GodotRelayServer .
-COPY --from=builder /app/build/linux/GodotRelayServer.pck .
+# REMOVED: COPY --from=builder /app/build/linux/GodotRelayServer.pck . # File is embedded
 RUN chmod +x ./GodotRelayServer
 RUN chown -R appuser:appuser /home/appuser
 USER appuser
