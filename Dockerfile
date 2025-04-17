@@ -43,6 +43,8 @@ RUN chown -R appuser:appuser /home/appuser
 # Switch to the non-root user
 USER appuser
 
-# === TEMPORARY DEBUG: Change CMD to list files ===
-# CMD ["./GodotRelayServer", "--headless", "--verbose"] # Original CMD
-CMD ["ls", "-l", "/home/appuser"] # Temporary CMD for debugging
+# Expose the port (for documentation)
+EXPOSE 7777
+
+# === UPDATED: Run with headless, verbose, and dummy drivers ===
+CMD ["./GodotRelayServer", "--headless", "--verbose", "--display-driver", "dummy", "--audio-driver", "dummy"]
