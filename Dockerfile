@@ -4,8 +4,8 @@ ARG GODOT_PROJECT_PATH=./
 WORKDIR /app/
 COPY . /app/
 RUN mkdir -v -p /app/build/linux
-RUN godot --headless --verbose --export-release "Linux" ./build/linux/GodotRelayServer --path /app
-# REMOVED: RUN ls -l /app
+RUN godot --headless --verbose --export-release "RelayServer" ./build/linux/GodotRelayServer --path /app
+RUN ls -lh /app/build/linux
 
 FROM debian:bullseye
 
