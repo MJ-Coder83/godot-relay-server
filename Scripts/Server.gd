@@ -4,7 +4,8 @@ const DEFAULT_PORT = 7777
 const MAX_PEERS = 4
 
 
-	
+func _init():
+	print("🔥 Server.gd: _init called")
 
 func _ready():
 	print("--- Server.gd _ready() STARTED ---")
@@ -36,6 +37,7 @@ func _ready():
 	#get_tree().multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 
 
+
 func _on_peer_connected(id):
 	print("Peer connected: %d" % id)
 
@@ -43,8 +45,7 @@ func _on_peer_disconnected(id):
 	print("Peer disconnected: %d" % id)
 
 func _process(delta):
-	print("🔥 Server.gd script loaded!")# Keep the server running.
-	
+	pass	
 	
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
