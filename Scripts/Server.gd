@@ -45,7 +45,7 @@ func _on_peer_disconnected(id):
 	print("Peer disconnected: %d" % id)
 
 func _process(delta):
-	pass	
+	print("🔥 Server.gd: _init called")
 	
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
