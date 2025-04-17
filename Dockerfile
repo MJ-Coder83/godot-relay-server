@@ -2,7 +2,7 @@
 # Use a Godot export image (choose one matching your Godot version, e.g., 4.4)
 # Find images here: https://github.com/godotengine/docker-builds
 #FROM barichello/godot-ci:4.4 AS builder
-FROM godotengine/godot-ubuntu:4.4 AS builder
+FROM godotengine/godot-export:4.4 AS builder
 
 # Set up the build environment
 ARG GODOT_PROJECT_PATH=./
