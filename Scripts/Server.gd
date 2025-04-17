@@ -13,7 +13,7 @@ const MAX_PEERS = 32
 # var peers = {}
 
 func _ready():
-	print("Available Engine Singletons: ", Engine.get_singleton_list())
+	
 	# Get the port from the environment variable if available (for Railway)
 	var port = OS.get_environment("PORT")
 	if port == "":
