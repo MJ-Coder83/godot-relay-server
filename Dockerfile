@@ -15,7 +15,7 @@ RUN mkdir -v -p /app/build/linux
 # Ensure the preset name matches exactly what you configured in Step 7.
 # The output binary name will be derived from your project name (e.g., GodotRelayServer).
 # Replace 'GodotRelayServer' below if your project name is different.
-RUN godot --headless --verbose --export-release "Linux/X11" ./build/linux/GodotRelayServer --path /app
+RUN godot --headless --verbose --export-release "Linux" ./build/linux/GodotRelayServer --path /app
 
 # --- Stage 2: Create the final minimal image ---
 # Use a minimal base image like Debian slim
