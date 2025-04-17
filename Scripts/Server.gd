@@ -3,6 +3,7 @@ extends Node
 # Define the port the server will listen on.
 # Railway provides the PORT environment variable, which we'll use later.
 # For local testing, we can use a default like 7777.
+const SERVER_HOST = "127.0.0.1" # Connect to your local machine
 const DEFAULT_PORT = 7777
 
 # Maximum number of players/peers allowed
@@ -29,6 +30,9 @@ func _ready():
 		print("Error creating server: %s" % error)
 		get_tree().quit(1) # Exit with error code
 		return
+		
+	# --- Wait for one frame BEFORE assigning the peer ---
+	await get_tree().process_frame
 
 	# Set this peer as the active multiplayer peer for the scene tree
 	get_tree().multiplayer.multiplayer_peer = peer
