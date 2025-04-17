@@ -46,5 +46,11 @@ USER appuser
 # Expose the port (for documentation)
 EXPOSE 7777
 
-# === UPDATED: Run with --headless and --verbose ===
+# === NEW: List files in the workdir right before CMD ===
+# Run as root to ensure permissions aren't an issue for ls
+USER root
+RUN ls -l /home/appuser
+USER appuser # Switch back to appuser for CMD
+
+# === Run with --headless and --verbose ===
 CMD ["./GodotRelayServer", "--headless", "--verbose"]
