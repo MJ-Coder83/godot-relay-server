@@ -48,4 +48,4 @@ USER appuser
 EXPOSE 7777
 
 # === UPDATED: Run the minimal debug scene ===
-CMD ["./GodotRelayServer", "--headless", "--verbose", "res://debug_scene.tscn"]
+CMD ["./GodotRelayServer", "--headless", "--verbose", "--rendering-driver", "opengl3", "res://debug_scene.tscn"]
