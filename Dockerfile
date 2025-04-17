@@ -1,6 +1,6 @@
 # --- Stage 1: Build the Godot headless server export ---
 # Downgrade builder image to Godot 4.2 stable
-FROM barichello/godot-ci:4.2 AS builder # <--- CHANGE VERSION HERE
+FROM barichello/godot-ci:4.2 AS builder
 
 ARG GODOT_PROJECT_PATH=./
 WORKDIR /app/
@@ -24,7 +24,7 @@ RUN apt-get update && \
 RUN useradd --system --create-home --shell /bin/bash appuser
 WORKDIR /home/appuser
 COPY --from=builder /app/build/linux/GodotRelayServer .
-COPY --from=builder /app/build/linux/GodotRelayServer.pck . # Copy PCK again
+COPY --from=builder /app/build/linux/GodotRelayServer.pck .
 RUN chmod +x ./GodotRelayServer
 RUN chown -R appuser:appuser /home/appuser
 USER appuser
