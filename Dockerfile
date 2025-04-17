@@ -1,11 +1,10 @@
-FROM barichello/godot-ci:4.4 AS builder
+FROM barichello/godot-ci:4.2 AS builder
 
 ARG GODOT_PROJECT_PATH=./
 WORKDIR /app/
 COPY . /app/
 RUN mkdir -v -p /app/build/linux
-RUN godot --headless --verbose --export-release "Linux" ./build/linux/GodotRelayServer --path /app
-# Removed debug ls command
+RUN godot --headless --verbose --export-release "Linux/X11" ./build/linux/GodotRelayServer --path /app
 
 FROM debian:bullseye
 
@@ -19,7 +18,7 @@ RUN apt-get update && \
 RUN useradd --system --create-home --shell /bin/bash appuser
 WORKDIR /home/appuser
 COPY --from=builder /app/build/linux/GodotRelayServer .
-# REMOVED: COPY --from=builder /app/build/linux/GodotRelayServer.pck . # File is embedded
+COPY --from=builder /app/build/linux/GodotRelayServer.pck .
 RUN chmod +x ./GodotRelayServer
 RUN chown -R appuser:appuser /home/appuser
 USER appuser
