@@ -1,13 +1,13 @@
 # --- Stage 1: Build the Godot headless server export ---
-# Revert to 4.4 builder to match local editor preset format
-FROM barichello/godot-ci:4.4 AS builder # <--- CHANGE VERSION BACK
+# Use 4.4 builder to match local editor preset format
+FROM barichello/godot-ci:4.4 AS builder
 
 ARG GODOT_PROJECT_PATH=./
 WORKDIR /app/
 COPY . /app/
 RUN mkdir -v -p /app/build/linux
-# Use "Linux/X11" preset name, matching local config
-RUN godot --headless --verbose --export-release "Linux/X11" ./build/linux/GodotRelayServer --path /app
+# Use "Linux" preset name, matching local 4.4 config
+RUN godot --headless --verbose --export-release "Linux" ./build/linux/GodotRelayServer --path /app # <-- CORRECT PRESET NAME
 
 # --- Stage 2: Create the final image using standard Debian ---
 FROM debian:bullseye
