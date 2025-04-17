@@ -23,8 +23,8 @@ RUN apt-get update && \
 # Create user, copy files, set permissions
 RUN useradd --system --create-home --shell /bin/bash appuser
 WORKDIR /home/appuser
-COPY --from=builder /app/build/linux/GodotRelayServer .
-COPY --from=builder /app/build/linux/GodotRelayServer.pck .
+COPY --from=builder /app/build/linux/GodotRelayServer
+COPY --from=builder /app/build/linux/GodotRelayServer.pck
 RUN chmod +x ./GodotRelayServer
 RUN chown -R appuser:appuser /home/appuser
 USER appuser
