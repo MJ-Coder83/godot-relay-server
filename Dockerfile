@@ -1,6 +1,6 @@
 # --- Stage 1: Build the Godot headless server export ---
 # Using barichello 4.3 builder - confirmed it can pull & build
-FROM barichello/godot-ci:4.3 AS builder # Use 4.3 builder
+FROM barichello/godot-ci:4.3 AS builder
 
 ARG GODOT_PROJECT_PATH=./
 WORKDIR /app/
