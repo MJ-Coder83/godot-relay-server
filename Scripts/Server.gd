@@ -13,10 +13,13 @@ const MAX_PEERS = 32
 # var peers = {}
 
 func _ready():
-	print("--- Server.gd _ready() STARTED ---") # <-- ADD THIS LINE
+	print("--- Server.gd _ready() STARTED ---") # Keep this
 
-	# --- COMMENT OUT ALL THE REST ---
-	# # Get the port from the environment variable if available (for Railway)
+	# --- Try creating the peer ---
+	var peer = ENetMultiplayerPeer.new()
+	print("--- ENetMultiplayerPeer INSTANTIATED ---") # <-- ADD THIS LINE
+
+	# --- COMMENT OUT THE REST AGAIN ---
 	# var port = OS.get_environment("PORT")
 	# if port == "":
 	#	 port = DEFAULT_PORT
@@ -25,8 +28,6 @@ func _ready():
 	#	 port = port.to_int()
 	#	 print("Found PORT environment variable: %d" % port)
 	#
-	# # Create the ENet multiplayer peer
-	# var peer = ENetMultiplayerPeer.new()
 	# var error = peer.create_server(port, MAX_PEERS)
 	#
 	# if error != OK:
