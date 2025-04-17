@@ -1,4 +1,4 @@
-FROM barichello/godot-ci:4.2.1 AS builder
+FROM barichello/godot-ci:4.4 AS builder
 
 ARG GODOT_PROJECT_PATH=./
 WORKDIR /app/
