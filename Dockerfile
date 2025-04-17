@@ -51,4 +51,4 @@ EXPOSE 7777
 # The command to run the server
 # Railway injects the $PORT environment variable
 # We don't need --headless here as it's a dedicated server export
-CMD ["./GodotRelayServer"]
+CMD ["./GodotRelayServer", "--headless"]
