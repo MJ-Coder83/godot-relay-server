@@ -28,7 +28,7 @@ COPY --from=builder /app/build/linux/GodotRelayServer.pck .
 RUN chmod +x ./GodotRelayServer
 RUN chown -R appuser:appuser /home/appuser
 USER appuser
-EXPOSE 7777 # Documentation only
+EXPOSE 7777
 
 # === Run the MINIMAL debug scene ===
 CMD ["./GodotRelayServer", "--headless", "--verbose", "res://debug_scene.tscn"]
