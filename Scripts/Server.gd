@@ -3,6 +3,9 @@ extends Node
 const DEFAULT_PORT = 7777
 const MAX_PEERS = 4
 
+
+	
+
 func _ready():
 	print("--- Server.gd _ready() STARTED ---")
 	#
@@ -40,9 +43,9 @@ func _on_peer_disconnected(id):
 	print("Peer disconnected: %d" % id)
 
 func _process(delta):
-	# Keep the server running.
-	pass
-
+	print("🔥 Server.gd script loaded!")# Keep the server running.
+	
+	
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		print("Shutdown signal received. Exiting.")

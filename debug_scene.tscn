@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://ddeb2wltrq3ah"]
+[gd_scene load_steps=2 format=3 uid="uid://ddeb2wltrq3ah"]
+
+[ext_resource type="Script" uid="uid://dy1r5hw30gwex" path="res://debug_scene.gd" id="1_lnlp5"]
 
 [node name="DebugRoot" type="Node"]
+script = ExtResource("1_lnlp5")
