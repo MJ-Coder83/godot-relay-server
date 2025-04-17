@@ -6,7 +6,7 @@ ARG GODOT_PROJECT_PATH=./
 WORKDIR /app/
 COPY . /app/
 RUN mkdir -v -p /app/build/linux
-# Export standard Linux build (preset "Linux", no dedicated_server flag)
+# Export standard Linux build (preset "Linux", Embed Pck enabled)
 RUN godot --headless --verbose --export-release "Linux" ./build/linux/GodotRelayServer --path /app
 
 # --- Stage 2: Create the final image using standard Debian ---
@@ -20,15 +20,15 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Create user, copy files, set permissions
+# Create user, copy executable ONLY, set permissions
 RUN useradd --system --create-home --shell /bin/bash appuser
 WORKDIR /home/appuser
 COPY --from=builder /app/build/linux/GodotRelayServer .
-COPY --from=builder /app/build/linux/GodotRelayServer.pck .
+# --- REMOVED: COPY --from=builder /app/build/linux/GodotRelayServer.pck . ---
 RUN chmod +x ./GodotRelayServer
 RUN chown -R appuser:appuser /home/appuser
 USER appuser
 EXPOSE 7777
 
-# === Run the MINIMAL debug scene ===
+# === Run the MAIN scene ===
 CMD ["./GodotRelayServer", "--headless", "--verbose", "res://main.tscn"]
