@@ -1,0 +1,9 @@
+.godot/
+.vscode/
+.git/
+*.import # Godot 3 import metadata, good practice to include
+*.local # Godot local project settings
+export_presets.cfg # Often contains local paths, better generated in CI if needed
+*.DS_Store # macOS specific
+Thumbs.db # Windows specific
+/build/ # Ignore local build output if any
