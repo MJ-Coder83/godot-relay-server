@@ -25,4 +25,4 @@ RUN chown -R appuser:appuser /home/appuser
 USER appuser
 EXPOSE 7777
 
-CMD ["./GodotRelayServer", "--headless", "--verbose"]
+CMD ["./GodotRelayServer", "--headless", "--verbose", "res://main.tscn"]
