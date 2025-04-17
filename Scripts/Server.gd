@@ -1,5 +1,7 @@
 extends Node
 
+var _frame_count := 0
+
 const DEFAULT_PORT = 7777
 const MAX_PEERS = 4
 
@@ -45,7 +47,9 @@ func _on_peer_disconnected(id):
 	print("Peer disconnected: %d" % id)
 
 func _process(delta):
-	print("🔥 Server.gd: _init called")
+	_frame_count += 1
+	if _frame_count % 60 == 0:  # every 60 frames
+		print("🔥 Server.gd: _process() heartbeat")
 	
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
