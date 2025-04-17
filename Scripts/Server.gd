@@ -3,7 +3,7 @@ extends Node
 # Define the port the server will listen on.
 # Railway provides the PORT environment variable, which we'll use later.
 # For local testing, we can use a default like 7777.
-const SERVER_HOST = "127.0.0.1" # Connect to your local machine
+#const SERVER_HOST = "127.0.0.1" # Connect to your local machine
 const DEFAULT_PORT = 7777
 
 # Maximum number of players/peers allowed
@@ -13,6 +13,7 @@ const MAX_PEERS = 32
 # var peers = {}
 
 func _ready():
+	print("Available Engine Singletons: ", Engine.get_singleton_list())
 	# Get the port from the environment variable if available (for Railway)
 	var port = OS.get_environment("PORT")
 	if port == "":
@@ -31,10 +32,9 @@ func _ready():
 		get_tree().quit(1) # Exit with error code
 		return
 		
-	# --- Wait for one frame BEFORE assigning the peer ---
-	await get_tree().process_frame
+	print("Available Engine Singletons: ", Engine.get_singleton_list())
+	# -----------------------------------------------
 
-	# Set this peer as the active multiplayer peer for the scene tree
 	get_tree().multiplayer.multiplayer_peer = peer
 	print("Relay server started on port %d. Waiting for connections..." % port)
 
