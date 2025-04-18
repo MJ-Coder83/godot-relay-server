@@ -1,46 +1,49 @@
 extends Node
 
 const DEFAULT_PORT = 7777
+const MAX_PEERS = 4
 
-# Create the peer up front
-var ws_peer := WebSocketMultiplayerPeer.new()
+func _init():
+	print("🔥 Server.gd: _init called")
 
 func _ready():
 	print("--- Server.gd _ready() STARTED ---")
 
-	# 1️⃣ Resolve port (no C‐style ternary; use an if‑block)
 	var port_env = OS.get_environment("PORT")
-	var port = DEFAULT_PORT
+	var port = port_env.to_int() if port_env != "" else DEFAULT_PORT
+
 	if port_env != "":
-		port = port_env.to_int()
 		print("🔌 Found PORT environment variable: %d" % port)
 	else:
-		print("🔌 No PORT env, using default: %d" % port)
+		print("❓ No PORT variable, using default: %d" % port)
 
-	# 2️⃣ Start WebSocket server
-	var err = ws_peer.create_server(port)
-	if err != OK:
-		push_error("❌ Failed to start WebSocket server: %s" % err)
+	var peer = ENetMultiplayerPeer.new()
+	var error = peer.create_server(port, MAX_PEERS)
+	
+	if error != OK:
+		print("❌ Error creating server: %s" % error)
 		get_tree().quit(1)
 		return
-	print("✅ WebSocket server listening on port %d" % port)
+	
+	get_tree().multiplayer.multiplayer_peer = peer
+	print("✅ Relay server started on port %d. Waiting for connections..." % port)
 
-	# 3️⃣ Hook it up
-	get_tree().multiplayer.multiplayer_peer = ws_peer
-	ws_peer.client_connected.connect(_on_client_connected)
-	ws_peer.client_disconnected.connect(_on_client_disconnected)
-	ws_peer.data_received.connect(_on_data_received)
+	get_tree().multiplayer.peer_connected.connect(_on_peer_connected)
+	get_tree().multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 
-func _process(delta):
-	# Poll so signals fire
-	ws_peer.poll()
+func _on_peer_connected(id):
+	print("🟢 Peer connected: %d" % id)
 
-func _on_client_connected(id):
-	print("Client connected, peer ID =", id)
+func _on_peer_disconnected(id):
+	print("🔴 Peer disconnected: %d" % id)
 
-func _on_client_disconnected(id):
-	print("Client disconnected, peer ID =", id)
+var _frame_count := 0
+func _process(_delta):
+	_frame_count += 1
+	if _frame_count % 20 == 0:
+		print("🔥 Server.gd: _process() heartbeat")
 
-func _on_data_received(from_id: int, packet: PackedByteArray):
-	var msg = packet.get_string_from_utf8()
-	print("Received from %d: %s" % [from_id, msg])
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		print("👋 Shutdown signal received. Exiting.")
+		get_tree().quit()
