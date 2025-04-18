@@ -3,6 +3,8 @@ extends Node
 const DEFAULT_PORT = 7777
 const MAX_PEERS = 4
 
+var _frame_count := 0
+
 func _init():
 	print("🔥 Server.gd: _init called")
 
@@ -37,11 +39,11 @@ func _on_peer_connected(id):
 func _on_peer_disconnected(id):
 	print("🔴 Peer disconnected: %d" % id)
 
-var _frame_count := 0
+
 func _process(_delta):
 	_frame_count += 1
-	if _frame_count % 20 == 0:
-		print("🔥 Server.gd: _process() heartbeat")
+	#if _frame_count % 20 == 0:
+		#print("🔥 Server.gd: _process() heartbeat")
 
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
