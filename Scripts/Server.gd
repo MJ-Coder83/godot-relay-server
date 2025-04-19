@@ -27,11 +27,11 @@ func _ready():
 		get_tree().quit(1)
 		return
 	
-	get_tree().multiplayer.multiplayer_peer = peer
+	multiplayer.multiplayer_peer = peer
 	print("✅ Relay server started on port %d. Waiting for connections..." % port)
 
-	get_tree().multiplayer.peer_connected.connect(_on_peer_connected)
-	get_tree().multiplayer.peer_disconnected.connect(_on_peer_disconnected)
+	multiplayer.peer_connected.connect(_on_peer_connected)
+	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 
 func _on_peer_connected(id):
 	print("🟢 Peer connected: %d" % id)
